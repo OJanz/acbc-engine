@@ -10,6 +10,7 @@ from app.db.base import Base, TimestampMixin
 if TYPE_CHECKING:
     from app.models.user import User
     from app.models.participant import Participant
+    from app.models.rule import ConceptRule
 
 
 class StudyStatus(str, enum.Enum):
@@ -58,6 +59,9 @@ class Study(TimestampMixin, Base):
     )
     participants: Mapped[list["Participant"]] = relationship(
         "Participant", back_populates="study"
+    )
+    rules: Mapped[list["ConceptRule"]] = relationship(
+        "ConceptRule", cascade="all, delete-orphan"
     )
 
 

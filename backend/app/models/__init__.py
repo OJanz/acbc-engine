@@ -1,5 +1,6 @@
 from app.models.user import User  # noqa: F401
 from app.models.study import Study, Attribute, Level  # noqa: F401
+from app.models.rule import ConceptRule, ConceptRuleCondition  # noqa: F401
 from app.models.participant import Participant, BYOResponse  # noqa: F401
 from app.models.survey import (  # noqa: F401
     ScreeningConcept,
@@ -15,6 +16,8 @@ __all__ = [
     "Study",
     "Attribute",
     "Level",
+    "ConceptRule",
+    "ConceptRuleCondition",
     "Participant",
     "BYOResponse",
     "ScreeningConcept",

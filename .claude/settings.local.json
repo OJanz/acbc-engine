@@ -21,7 +21,12 @@
       "Bash(npm install)",
       "Bash(npx tsc --noEmit -p tsconfig.app.json)",
       "Bash(echo \"Exit: $?\")",
-      "Bash(npm run build)"
+      "Bash(npm run build)",
+      "Bash(npm install @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities)",
+      "Bash(npx shadcn@latest add card badge alert-dialog tooltip select textarea --yes)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(python -c \"from app.api.v1.attributes import router; print\\(''OK''\\)\")",
+      "Bash(python -m alembic upgrade head)"
     ]
   }
 }
