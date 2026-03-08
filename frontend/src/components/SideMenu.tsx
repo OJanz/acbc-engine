@@ -39,13 +39,18 @@ export default function SideMenu({ open, onClose }: SideMenuProps) {
             <Link to="/">Home</Link>
           </Button>
           {user ? (
-            <Button
-              variant="ghost"
-              className="justify-start text-base"
-              onClick={handleLogout}
-            >
-              Logout
-            </Button>
+            <>
+              <Button variant="ghost" className="justify-start text-base" asChild onClick={onClose}>
+                <Link to="/studies">Meine Studien</Link>
+              </Button>
+              <Button
+                variant="ghost"
+                className="justify-start text-base"
+                onClick={handleLogout}
+              >
+                Logout
+              </Button>
+            </>
           ) : (
             <Button variant="ghost" className="justify-start text-base" asChild onClick={onClose}>
               <Link to="/login">Login</Link>
