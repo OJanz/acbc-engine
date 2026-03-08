@@ -23,7 +23,7 @@ export default function LoginPage() {
       await login(email, password)
       const user = await getMe()
       setUser(user)
-      navigate('/')
+      navigate('/studies')
     } catch {
       setError('E-Mail oder Passwort ist falsch.')
     } finally {

@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(source ../venv/Scripts/activate)",
+      "Bash(pip install -r requirements.txt -q)",
+      "Bash(pip index versions fastapi-users)",
+      "Bash(alembic revision --autogenerate -m \"add_users_table\")",
+      "Bash(alembic upgrade head)",
+      "Bash(AUTH_SECRET=testsecret-32chars-minimum-required python -c \"from app.main import app; print\\(''OK - App startet fehlerfrei''\\)\")",
+      "Bash(AUTH_SECRET=testsecret-32chars-minimum-required /e/Python/ACBC/venv/Scripts/python.exe -c \"from app.main import app; print\\(''OK - App startet fehlerfrei''\\)\")",
+      "Bash(python -m pip install -r requirements.txt -q)",
+      "Bash(python -c \":*)",
+      "Bash(AUTH_SECRET=test DATABASE_URL=postgresql+psycopg2://x:x@localhost/x python -c \":*)",
+      "WebSearch",
+      "WebFetch(domain:www.lettermint.net)",
+      "WebFetch(domain:lettermint.co)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:lettermint.mintlify.app)",
+      "Bash(python -m pip install lettermint -q)",
+      "Bash(AUTH_SECRET=test DATABASE_URL=postgresql+psycopg2://x:x@localhost/x python -c \"from app.core.email import send_verification_email, send_password_reset_email; print\\(''OK''\\)\")",
+      "Bash(npm install)",
+      "Bash(npx tsc --noEmit -p tsconfig.app.json)",
+      "Bash(echo \"Exit: $?\")",
+      "Bash(npm run build)"
+    ]
+  }
+}

@@ -3,3 +3,5 @@ __pycache__/
 .env
 tunnel.bat
 .vscode
+frontend/node_modules/
+frontend/dist/
