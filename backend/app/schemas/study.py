@@ -9,6 +9,9 @@ from app.models.study import StudyStatus
 class StudyBase(BaseModel):
     name: str
     description: str | None = None
+    welcome_message: str | None = None
+    byo_instruction_title: str | None = None
+    byo_instruction_text: str | None = None
     status: StudyStatus = StudyStatus.draft
 
 
@@ -19,6 +22,9 @@ class StudyCreate(StudyBase):
 class StudyUpdate(BaseModel):
     name: str | None = None
     description: str | None = None
+    welcome_message: str | None = None
+    byo_instruction_title: str | None = None
+    byo_instruction_text: str | None = None
     status: StudyStatus | None = None
     n_screening_concepts: int | None = None
     n_choice_tasks: int | None = None

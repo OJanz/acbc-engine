@@ -20,6 +20,8 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>
 
 interface Step3DesignParamsProps {
+  studyId: string
+  studyStatus: 'draft' | 'active' | 'closed'
   defaultValues: {
     n_screening_concepts: number
     n_choice_tasks: number
@@ -35,6 +37,8 @@ interface Step3DesignParamsProps {
 }
 
 export default function Step3DesignParams({
+  studyId,
+  studyStatus,
   defaultValues,
   onSave,
   onBack,
@@ -58,6 +62,8 @@ export default function Step3DesignParams({
   const n = values.n_screening_concepts ?? defaultValues.n_screening_concepts
   const tasks = values.n_choice_tasks ?? defaultValues.n_choice_tasks
   const perTask = values.concepts_per_choice_task ?? defaultValues.concepts_per_choice_task
+
+  const participantUrl = `${window.location.origin}/survey/${studyId}`
 
   return (
     <form onSubmit={handleSubmit(onSave)} className="flex flex-col gap-5">
@@ -150,6 +156,26 @@ export default function Step3DesignParams({
           </TooltipProvider>
         </div>
       </div>
+
+      {studyStatus === 'active' && (
+        <div className="flex flex-col gap-1.5 pt-2">
+          <Label>Probanden-URL</Label>
+          <div className="flex gap-2">
+            <Input
+              readOnly
+              value={participantUrl}
+              className="bg-muted font-mono text-sm"
+            />
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => navigator.clipboard.writeText(participantUrl)}
+            >
+              Kopieren
+            </Button>
+          </div>
+        </div>
+      )}
     </form>
   )
 }

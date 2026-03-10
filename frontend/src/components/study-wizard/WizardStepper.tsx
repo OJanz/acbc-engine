@@ -10,35 +10,42 @@ const STEPS = [
 
 interface WizardStepperProps {
   currentStep: 1 | 2 | 3 | 4
+  onStepClick: (step: 1 | 2 | 3 | 4) => void
 }
 
-export default function WizardStepper({ currentStep }: WizardStepperProps) {
+export default function WizardStepper({ currentStep, onStepClick }: WizardStepperProps) {
   return (
     <nav className="flex items-center gap-0 mb-8">
       {STEPS.map((step, index) => {
         const stepNumber = (index + 1) as 1 | 2 | 3 | 4
         const isCompleted = stepNumber < currentStep
         const isActive = stepNumber === currentStep
+        const isClickable = stepNumber !== currentStep
 
         return (
           <div key={stepNumber} className="flex items-center flex-1 last:flex-none">
             <div className="flex flex-col items-center gap-1.5">
-              <div
+              <button
+                type="button"
+                onClick={() => isClickable && onStepClick(stepNumber)}
+                disabled={!isClickable}
                 className={cn(
                   'flex h-8 w-8 items-center justify-center rounded-full border-2 text-sm font-semibold transition-colors',
-                  isCompleted && 'border-primary bg-primary text-primary-foreground',
-                  isActive && 'border-primary bg-background text-primary',
-                  !isCompleted && !isActive && 'border-muted-foreground/30 bg-background text-muted-foreground',
+                  isCompleted && 'border-primary bg-primary text-primary-foreground cursor-pointer hover:opacity-80',
+                  isActive && 'border-primary bg-background text-primary cursor-default',
+                  !isCompleted && !isActive && 'border-muted-foreground/30 bg-background text-muted-foreground cursor-pointer hover:border-muted-foreground/60',
                 )}
               >
                 {isCompleted ? <Check className="h-4 w-4" /> : stepNumber}
-              </div>
+              </button>
               <span
                 className={cn(
                   'text-xs font-medium whitespace-nowrap',
                   isActive && 'text-foreground',
-                  !isActive && 'text-muted-foreground',
+                  !isActive && isClickable && 'text-muted-foreground cursor-pointer',
+                  !isActive && !isClickable && 'text-muted-foreground',
                 )}
+                onClick={() => isClickable && onStepClick(stepNumber)}
               >
                 {step.label}
               </span>

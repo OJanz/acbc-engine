@@ -51,7 +51,7 @@ export default function StudyPage() {
   }
 
   // Step 1: save basic info
-  async function handleStep1Save(data: { name: string; description: string }) {
+  async function handleStep1Save(data: { name: string; description: string; welcome_message: string; byo_instruction_title: string; byo_instruction_text: string }) {
     setSaving(true)
     setError('')
     try {
@@ -59,6 +59,9 @@ export default function StudyPage() {
         const created = await createStudy({
           name: data.name,
           description: data.description || undefined,
+          welcome_message: data.welcome_message || undefined,
+          byo_instruction_title: data.byo_instruction_title || undefined,
+          byo_instruction_text: data.byo_instruction_text || undefined,
         })
         setStudy(created)
         setStudyId(created.id)
@@ -68,6 +71,9 @@ export default function StudyPage() {
         const updated = await updateStudy(studyId!, {
           name: data.name,
           description: data.description || undefined,
+          welcome_message: data.welcome_message || undefined,
+          byo_instruction_title: data.byo_instruction_title || undefined,
+          byo_instruction_text: data.byo_instruction_text || undefined,
         })
         setStudy(updated)
         goToStep(2)
@@ -105,7 +111,6 @@ export default function StudyPage() {
       const updated = await updateStudy(studyId!, { status: 'active' })
       setStudy(updated)
       setShowActivateDialog(false)
-      navigate('/studies')
     } catch {
       setError('Aktivierung fehlgeschlagen.')
     } finally {
@@ -123,25 +128,26 @@ export default function StudyPage() {
 
   return (
     <div className="mx-auto max-w-3xl py-8">
-      <div className="mb-6 flex items-center gap-4">
-        <button
-          onClick={() => navigate('/studies')}
-          className="text-sm text-muted-foreground hover:text-foreground"
-        >
-          ← Zurück
-        </button>
-        <h1 className="text-2xl font-semibold">
-          {isNew ? 'Neue Studie anlegen' : (study?.name ?? 'Studie bearbeiten')}
-        </h1>
-      </div>
+      <button
+        onClick={() => navigate('/studies')}
+        className="mb-2 text-sm text-muted-foreground hover:text-foreground"
+      >
+        ← Zurück
+      </button>
+      <h1 className="mb-6 text-2xl font-semibold">
+        {isNew ? 'Neue Studie anlegen' : (study?.name ?? 'Studie bearbeiten')}
+      </h1>
 
-      <WizardStepper currentStep={currentStep} />
+      <WizardStepper currentStep={currentStep} onStepClick={goToStep} />
 
       {currentStep === 1 && (
         <Step1BasicInfo
           defaultValues={{
             name: study?.name ?? '',
             description: study?.description ?? '',
+            welcome_message: study?.welcome_message ?? '',
+            byo_instruction_title: study?.byo_instruction_title ?? '',
+            byo_instruction_text: study?.byo_instruction_text ?? '',
           }}
           onSave={handleStep1Save}
           saving={saving}
@@ -170,6 +176,8 @@ export default function StudyPage() {
 
       {currentStep === 4 && studyId && (
         <Step4DesignParams
+          studyId={studyId}
+          studyStatus={study?.status ?? 'draft'}
           defaultValues={{
             n_screening_concepts: study?.n_screening_concepts ?? 12,
             n_choice_tasks: study?.n_choice_tasks ?? 10,

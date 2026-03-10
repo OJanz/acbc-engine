@@ -42,6 +42,9 @@ class Study(TimestampMixin, Base):
     )
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
+    welcome_message: Mapped[str | None] = mapped_column(Text, nullable=True)
+    byo_instruction_title: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    byo_instruction_text: Mapped[str | None] = mapped_column(Text, nullable=True)
     status: Mapped[StudyStatus] = mapped_column(
         SQLEnum(StudyStatus, name="studystatus"),
         default=StudyStatus.draft,

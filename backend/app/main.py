@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1.auth import bearer_backend, cookie_backend, fastapi_users
-from app.api.v1 import studies, attributes, rules
+from app.api.v1 import studies, attributes, rules, survey
 from app.core.config import settings
 from app.schemas.user import UserCreate, UserRead, UserUpdate
 
@@ -61,6 +61,9 @@ app.include_router(
 app.include_router(studies.router, prefix="/api/v1/studies", tags=["studies"])
 app.include_router(attributes.router, prefix="/api/v1/studies", tags=["attributes"])
 app.include_router(rules.router, prefix="/api/v1/studies", tags=["rules"])
+
+# Survey – public, no auth
+app.include_router(survey.router, prefix="/survey", tags=["survey"])
 
 
 @app.get("/")

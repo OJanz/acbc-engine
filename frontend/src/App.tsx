@@ -9,6 +9,7 @@ import ResetPasswordPage from '@/pages/ResetPasswordPage'
 import VerifyEmailPage from '@/pages/VerifyEmailPage'
 import StudiesPage from '@/pages/StudiesPage'
 import StudyPage from '@/pages/StudyPage'
+import SurveyPage from '@/pages/SurveyPage'
 
 export default function App() {
   return (
@@ -27,6 +28,8 @@ export default function App() {
               <Route path="/studies/:id" element={<StudyPage />} />
             </Route>
           </Route>
+
+          <Route path="/survey/:id" element={<SurveyPage />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
