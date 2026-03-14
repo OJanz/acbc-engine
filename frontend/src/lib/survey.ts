@@ -22,16 +22,16 @@ export interface SurveyAttribute {
 }
 
 export const getSurveyEntry = (studyId: string): Promise<SurveyEntry> =>
-  apiFetch(`/survey/${studyId}`)
+  apiFetch(`/api/v1/survey/${studyId}`)
 
 export const startSurvey = (studyId: string): Promise<{ participant_id: string }> =>
-  apiFetch(`/survey/${studyId}/start`, { method: 'POST' })
+  apiFetch(`/api/v1/survey/${studyId}/start`, { method: 'POST' })
 
 export const getSurveyAttributes = (studyId: string): Promise<SurveyAttribute[]> =>
-  apiFetch(`/survey/${studyId}/attributes`)
+  apiFetch(`/api/v1/survey/${studyId}/attributes`)
 
 export const submitByo = (studyId: string, selections: Record<string, string>): Promise<void> =>
-  apiFetch(`/survey/${studyId}/byo`, {
+  apiFetch(`/api/v1/survey/${studyId}/byo`, {
     method: 'POST',
     body: JSON.stringify({ selections }),
   })

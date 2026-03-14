@@ -21,15 +21,6 @@ export default defineConfig({
         target: 'http://localhost:8000',
         changeOrigin: true,
       },
-      '/survey': {
-        target: 'http://localhost:8000',
-        changeOrigin: true,
-        bypass(req) {
-          if (req.headers.accept?.includes('text/html')) {
-            return '/index.html'
-          }
-        },
-      },
     },
   },
 })

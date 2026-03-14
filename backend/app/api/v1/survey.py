@@ -82,7 +82,7 @@ async def start_survey(
         secure=True,
         samesite="lax",
         max_age=604800,
-        path="/survey",
+        path="/api/v1/survey",
     )
     return response
 

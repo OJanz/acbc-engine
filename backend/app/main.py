@@ -63,7 +63,7 @@ app.include_router(attributes.router, prefix="/api/v1/studies", tags=["attribute
 app.include_router(rules.router, prefix="/api/v1/studies", tags=["rules"])
 
 # Survey – public, no auth
-app.include_router(survey.router, prefix="/survey", tags=["survey"])
+app.include_router(survey.router, prefix="/api/v1/survey", tags=["survey"])
 
 
 @app.get("/")

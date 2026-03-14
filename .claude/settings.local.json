@@ -26,7 +26,12 @@
       "Bash(npx shadcn@latest add card badge alert-dialog tooltip select textarea --yes)",
       "Bash(npx tsc --noEmit)",
       "Bash(python -c \"from app.api.v1.attributes import router; print\\(''OK''\\)\")",
-      "Bash(python -m alembic upgrade head)"
+      "Bash(python -m alembic upgrade head)",
+      "Bash(grep -r acbc.oliverjanz.com /e/Python/ACBC --include=*.ts --include=*.tsx --include=*.py --include=*.json)",
+      "Bash(cat /e/Python/ACBC/.github/workflows/*.yml)",
+      "Bash(grep -r \"oliverjanz.com\\\\|acbc\\\\.oliverjanz\\\\|https://\" /e/Python/ACBC/frontend/src --include=*.ts --include=*.tsx)",
+      "Bash(xargs grep:*)",
+      "Bash(find /e/Python/ACBC -name deploy.sh -o -name nginx* -o -name *.nginx)"
     ]
   }
 }
